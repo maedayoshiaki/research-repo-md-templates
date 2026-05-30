@@ -90,4 +90,4 @@ LICENSE: Copyright (c) 2026 {{YOUR NAME / ORG}}          →  Copyright (c) 2026
 
 ## License
 
-[MIT](./LICENSE)。`LICENSE` の `{{YOUR NAME / ORG}}` を埋めること。
+[MIT](./LICENSE)
