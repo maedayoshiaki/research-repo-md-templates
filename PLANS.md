@@ -7,6 +7,7 @@
 ## When To Write A Plan（いつ計画するか）
 
 次のいずれかなら、着手前にプランを書く：
+
 - 複数ファイルにまたがる
 - 新機能・大きなリファクタ
 - 1 時間以上かかりそう
@@ -21,6 +22,30 @@
 - 設計判断は `Approach` に**複数案を併記**し、選んだ理由を残す。
 - 完了したら `Outcomes & Retrospective` を埋め、要点を `MEMORY.md` へ。
 
+## Task Categories（必要に応じて分ける）
+
+計画が混ざる場合は、タスクを次の3種類に分ける。
+
+- **Research tasks:** 理論、仮説、実験設計、評価
+- **Implementation tasks:** 実装、テスト、リファクタ
+- **Learning tasks:** Git、言語仕様、ライブラリ、設計パターンの学習
+
+例：
+
+```md
+### Milestones / Steps
+
+#### Research tasks
+- [ ] 評価指標を決める
+
+#### Implementation tasks
+- [ ] データ読み込み処理を実装する
+- [ ] テストを追加する
+
+#### Learning tasks
+- [ ] pytest fixture の使い方を理解する
+```
+
 ---
 
 <!-- ▼▼ ここから 1 プランのテンプレート。コピーして使う ▼▼ -->
@@ -33,10 +58,12 @@
 - **Related:** {{issue #, docs/THEORY.md の式番号, docs/ARCHITECTURE.md の節 など}}
 
 ### Goal & Non-Goals
+
 - **Goal:** {{このプランで達成すること（1〜3 文）}}
 - **Non-Goals:** {{今回はやらないこと（スコープを狭めるために明記）}}
 
 ### Context & Constraints
+
 {{背景・前提・制約。理論的背景は docs/THEORY.md、設計制約は docs/ARCHITECTURE.md を参照}}
 
 ### Approach（検討した案 — 複数案）
@@ -53,6 +80,7 @@
 - **理由:** {{なぜこれを選んだか}}
 
 ### Milestones / Steps
+
 - [ ] {{ステップ 1}}
 - [ ] {{ステップ 2}}
 - [ ] {{ステップ 3}}
@@ -60,7 +88,8 @@
 - [ ] STATUS / MEMORY 更新
 
 ### Risks & Compatibility
-- {{破壊的変更の有無（あれば人間確認: AGENTS.md §1）}}
+
+- {{破壊的変更の有無（あれば人間確認: AGENTS.md）}}
 - {{依存追加・パフォーマンス・数値安定性などのリスク}}
 
 ---
@@ -68,15 +97,19 @@
 ### Living Sections（作業中に更新する。見出しは英語のまま固定）
 
 #### Progress
+
 {{今どこまで進んだか。日付つきで追記}}
 
 #### Surprises & Discoveries
+
 {{想定外だったこと・気づき。MEMORY の落とし穴に昇格する候補}}
 
 #### Decision Log
+
 {{作業中に下した判断と理由。例: 「2024-xx-xx 〇〇は△△の理由で採用しない」}}
 
 #### Outcomes & Retrospective
+
 {{完了後に記入。結果・残課題・次にやるなら何を変えるか}}
 
 <!-- ▲▲ テンプレートここまで ▲▲ -->

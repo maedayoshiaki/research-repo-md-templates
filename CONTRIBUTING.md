@@ -1,6 +1,7 @@
-# CONTRIBUTING — 開発参加の手引き
+# CONTRIBUTING — Git Rules
 
-人間の開発者向け。AI と併用する際のルールも含む（規約の本体は `AGENTS.md`）。
+人間の開発者向けの Git ルール。
+AI 併用時の作業方針は `AGENTS.md` を参照する。
 
 ## Setup
 
@@ -8,13 +9,69 @@
 {{uv sync}}
 ```
 
-## Branch & Commit
-- ブランチ: `{{feat/<short-description>}}` / `{{fix/...}}`
-- コミット: 命令形・簡潔・小さく焦点を絞る（例: `add cosine LR scheduler`）。
+## Branch rules
 
-## Before You Open a PR
+- `main` に直接コミットしない。
+- 作業ごとにブランチを作る。
+- ブランチ名は次の形式にする。
 
-検証スタックを通す：
+```text
+feature/<short-name>
+fix/<short-name>
+docs/<short-name>
+experiment/<short-name>
+```
+
+例：
+
+```text
+feature/add-loader
+fix/path-bug
+docs/update-theory
+experiment/baseline-test
+```
+
+## Commit rules
+
+コミットメッセージは次の形式にする。
+
+```text
+<type>: <summary>
+```
+
+使用する `type` は以下に限定する。
+
+| type | 用途 |
+|---|---|
+| `feat` | 新機能 |
+| `fix` | バグ修正 |
+| `docs` | ドキュメント修正 |
+| `refactor` | 挙動を変えない整理 |
+| `test` | テスト追加・修正 |
+| `exp` | 実験コード・実験条件の追加 |
+| `chore` | その他の作業 |
+
+例：
+
+```text
+feat: add csv loader
+fix: correct output path
+docs: update theory explanation
+exp: add baseline experiment
+```
+
+## Pull request rules
+
+PR には以下を書く。
+
+- 何を変更したか
+- なぜ変更したか
+- どう確認したか
+- 関連する Issue、実験、またはドキュメント
+
+## Before opening a PR
+
+可能な範囲で検証スタックを通す。
 
 ```bash
 {{make format}}
@@ -23,20 +80,20 @@
 {{make test}}
 ```
 
-PR は `.github/PULL_REQUEST_TEMPLATE.md` に沿って記述。
+ドキュメントのみの変更では、上記を省略してよい。
+その場合は PR に `docs only` と書く。
 
-## Working With AI Agents（AI 併用のルール）
+## Working with AI agents
 
-本プロジェクトは AI に丸投げせず、開発者が主導する（`AGENTS.md` §1〜4）。
+- AI に丸投げせず、開発者が最終判断する。
+- 数式、理論、実験条件、アーキテクチャ、公開 API、破壊的変更は人間が確認する。
+- AI には、必要に応じて短い理由や代替案を出させる。
+- 作業後に `STATUS.md` を更新し、確定事項は `MEMORY.md` に残す。
 
-- **人間が必ず関与する:** 数式・理論（`docs/THEORY.md`）、アーキテクチャ・API・破壊的変更、新規依存。
-- **AI には複数案を出させる:** 非自明な設計は 2〜3 案を比較してから選ぶ。
-- **理由を残す:** なぜその実装・パターンにしたかをコミットや該当 doc に短く記す。
-- **記録を更新する:** 作業後に `STATUS.md`、確定事項は `MEMORY.md` を更新。
+## Review checklist
 
-## Review Checklist
-- ✅ 検証スタックが通る
-- ✅ テストが新挙動とエッジケースを網羅
-- ✅ 設計判断の理由が残っている
-- ✅ 数式は人間確認済み・式↔コード対応あり
-- ✅ ドキュメント（STATUS / MEMORY / docs）が更新済み
+- [ ] 変更範囲が小さい
+- [ ] 必要な検証を行った
+- [ ] 関連 Markdown を更新した
+- [ ] 数式・理論・実験条件の変更は人間が確認した
+- [ ] コミットとブランチ名がルールに従っている
