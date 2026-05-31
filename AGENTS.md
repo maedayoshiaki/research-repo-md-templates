@@ -65,7 +65,7 @@ AI コーディングエージェント（Claude Code / Codex 等）向けの作
 
 例：
 
-```md
+````md
 ### 2026-05-31: pathlib
 
 `Path` を使うと、OS に依存しにくいパス操作ができる。
@@ -75,7 +75,7 @@ from pathlib import Path
 
 file_path = Path("data") / "input.csv"
 ```
-```
+````
 
 ## Markdown update rules
 
