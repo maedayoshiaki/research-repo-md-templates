@@ -2,20 +2,32 @@
 
 AI コーディングエージェントに期待する回答形式の例。
 目的は、AI に丸投げせず、人間が設計判断・中核実装・学習確認に参加できるようにすること。
+ただし、人間の介入度は `AGENTS.md` の Repository Human Involvement Profile に従う。
 
 ## Principles
 
 - 非自明な作業では、実装前に短い方針を出す。
 - 設計判断がある場合は、2〜5 案を出し、人間が選ぶ余地を残す。
 - `Human Coding Slots` はすべての作業で必須ではない。
-- 学習価値が高い作業では、`Human Coding Slots` を積極的に提案する。
+- 学習価値が高い作業では、Repository Profile に応じて `Human Coding Slots` を提案する。
 - AI は、実装・レビュー・テスト案・リファクタ案を支援する。
-- 学習対象の中核部分は、AI が勝手に完成実装しない。
+- 学習対象の中核部分は、`L2` 以上では AI が勝手に完成実装しない。
 - 完了報告では、AI が書いた箇所、人間が書いた箇所、未確認箇所を分けて書く。
+- コーディングエージェントが subagent を使える場合は、調査・レビュー・テスト失敗の切り分けに使ってよい。ただし Profile と人間レビューを迂回しない。
+
+## Profile-Based Response Rules
+
+| Profile | AI の基本応答 | Human Coding Slots | 完了報告で強調すること |
+|---|---|---|---|
+| `L0 Speed First` | すぐ実装方針と完成実装に進んでよい | 原則省略 | 変更点、実行方法、検証結果 |
+| `L1 Review Gate` | 完成実装を出してよいが、主要 diff を説明する | 任意 | 人間が読むべき diff、設計意図 |
+| `L2 Selective Human Slots` | 重要部分だけ Slot 化し、周辺は実装してよい | 1〜3 個 | Slot、AI 実装部分、理解確認 |
+| `L3 Learning First` | 中核実装はヒント・疑似コード・レビュー中心 | 2〜4 個 | 人間が実装した中核、学習事項 |
+| `L4 Human Driver` | 完成コードを先に出さず、問題分解とレビュー中心 | 中核処理を小さく分割 | 人間主導の実装、再実装できる範囲 |
 
 ## When to Suggest Human Coding Slots
 
-AI は次のような場合に `Human Coding Slots` を提案する。
+AI は次のような場合に、Repository Profile に応じて `Human Coding Slots` を提案する。
 
 - 新しい言語機能、ライブラリ、API を学ぶとき
 - 関数分割、クラス設計、責務分離を学ぶとき
@@ -31,14 +43,20 @@ AI は次のような場合に `Human Coding Slots` を提案する。
 - 設定の微修正
 - 明らかに定型的な処理
 - 学習目的でない docs only の軽微な変更
+- `L0` / `L1` で速度やレビューを優先する作業
 
 ---
 
-## Example 1: 作業開始時の回答
+## Example 1: 作業開始時の回答（L2）
 
 ```md
 ## Task understanding
 {{この作業で達成すること}}
+
+## Repository profile
+- Profile: `L2 Selective Human Slots`
+- Mode: `Pair Programming`
+- Override: none
 
 ## Current context
 - {{既存構成・制約の理解}}
@@ -69,7 +87,57 @@ AI は次のような場合に `Human Coding Slots` を提案する。
 
 ---
 
-## Example 2: 設計案を出す回答
+## Example 2: L0 Speed First の回答
+
+```md
+## Summary
+Profile は `L0 Speed First` なので、Human Coding Slots は省略します。
+AI 側で実装、簡易テスト、実行方法の整理まで進めます。
+
+## Proposed changes
+- {{変更点1}}
+- {{変更点2}}
+
+## Human review points
+- {{研究前提・数式・評価指標など、人間確認が必要な点}}
+- {{出力が期待と合っているか}}
+
+## Verification
+- {{実行コマンド}}
+- {{確認結果}}
+```
+
+---
+
+## Example 3: L4 Human Driver の回答
+
+```md
+## Task breakdown
+Profile は `L4 Human Driver` なので、完成実装は先に出しません。
+まず中核処理を小さい Human Coding Slots に分けます。
+
+## Human Coding Slots
+
+| Slot | 人間が書く部分 | AI が出してよい支援 | 完了条件 |
+|---|---|---|---|
+| H1 | {{関数の責務}} | 入出力仕様、疑似コード、テスト観点 | 人間実装後にレビュー |
+| H2 | {{境界条件処理}} | よくあるミス、失敗ケース | 小さいテスト通過 |
+| H3 | {{テスト本体}} | ケース案、期待値の考え方 | 主要ケースを人間が追加 |
+
+## Hints for H1
+- 入力: {{...}}
+- 出力: {{...}}
+- 境界条件: {{...}}
+- 疑似コード:
+  1. {{...}}
+  2. {{...}}
+
+人間が実装した後、レビューと改善案を返します。
+```
+
+---
+
+## Example 4: 設計案を出す回答
 
 ```md
 ## Design alternatives
@@ -99,7 +167,26 @@ AI は次のような場合に `Human Coding Slots` を提案する。
 
 ---
 
-## Example 3: 実装中の回答
+## Example 5: Subagent を使う場合
+
+```md
+## Subagent use
+
+このタスクでは subagent を使えるため、次を分担します。
+Profile は `{{L1 / L2 / L3}}` なので、subagent は調査・レビュー補助に限定します。
+
+| Agent | 役割 | 出力 | Main agent の確認 |
+|---|---|---|---|
+| search subagent | 既存 API の利用箇所を探す | 候補ファイル一覧 | 実際の採用箇所を確認 |
+| test subagent | 失敗ログを読む | 原因候補 | 修正方針は main agent が統合 |
+| docs subagent | Markdown 整合性を見る | 更新漏れ候補 | PR 説明に反映 |
+
+Subagent の出力は未確認情報として扱い、最終判断は main agent が人間に提示します。
+```
+
+---
+
+## Example 6: 実装中の回答
 
 ```md
 ## Progress
@@ -121,11 +208,16 @@ AI は次のような場合に `Human Coding Slots` を提案する。
 
 ---
 
-## Example 4: 完了報告
+## Example 7: 完了報告
 
 ```md
 ## Summary
 {{何を変更したか}}
+
+## Repository profile
+- Profile: `{{L0 / L1 / L2 / L3 / L4}}`
+- Mode: `{{Collaboration Mode}}`
+- Override: {{none / stricter / looser}}
 
 ## Changed files
 
@@ -138,7 +230,11 @@ AI は次のような場合に `Human Coding Slots` を提案する。
 
 | Slot | 結果 | 確認方法 |
 |---|---|---|
-| H1 | {{人間が実装した内容}} | {{test / review / small input}} |
+| H1 | {{人間が実装した内容。該当なしなら none}} | {{test / review / small input}} |
+
+## Subagent use
+- Used: Yes / No
+- If yes: {{何に使い、main agent が何を確認したか}}
 
 ## Verification
 - [ ] format
@@ -154,7 +250,7 @@ AI は次のような場合に `Human Coding Slots` を提案する。
 
 ---
 
-## Example 5: PR 本文の出力
+## Example 8: PR 本文の出力
 
 ```md
 ## Summary
@@ -166,6 +262,11 @@ AI は次のような場合に `Human Coding Slots` を提案する。
 ## Changes
 - {{変更点1}}
 - {{変更点2}}
+
+## Human Involvement Profile
+- Repository Profile: `{{L0 / L1 / L2 / L3 / L4}}`
+- This PR Mode: `{{mode}}`
+- Profile Override: `{{none / stricter / looser}}`
 
 ## Human-written parts
 
