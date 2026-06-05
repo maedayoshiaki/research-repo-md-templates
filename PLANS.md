@@ -13,6 +13,7 @@
 - 1 時間以上かかりそう
 - 数式・アルゴリズムの新規実装
 - 人間が学びたい実装概念を含む
+- Repository Human Involvement Profile から外れる進め方をする
 
 軽微な修正（タイポ、1 関数の小修正）はプラン不要。
 
@@ -21,12 +22,26 @@
 - 作業中、`Living Sections` を**こまめに更新**する（後でまとめて書こうとしない）。
 - スコープが変わったらプランを**書き直す**。
 - 設計判断は `Approach` に**最大 5 案まで**併記し、選んだ理由を残す。
-- 学習したい作業では、`Collaboration Mode`、`Human Coding Slots`、`Explain-back` を積極的に使う。
-- ただし、軽微な修正や定型作業では `Human Coding Slots` を省略してよい。
+- タスクでは、まず `Repository Profile` を確認し、その範囲内で `Collaboration Mode` を選ぶ。
+- 学習したい作業では、Profile に応じて `Human Coding Slots`、`Explain-back` を積極的に使う。
+- ただし、`L0` / `L1` や軽微な修正・定型作業では `Human Coding Slots` を省略してよい。
 - デザインパターン、実装スタイル、研究アルゴリズム、評価指標、前処理などを学ぶ場合は、できるだけ `Human Coding Slots` を使う。
+- コーディングエージェントが subagent を使える場合は、調査・レビュー・テスト案・機械的修正に使ってよい。ただし Profile や人間レビューを迂回しない。
 - 完了したら `Outcomes & Retrospective` を埋め、要点を `MEMORY.md` へ。
 
+## Repository Human Involvement Profiles（リポジトリ全体の介入度）
+
+| Profile | 目的 | Human Coding Slots | AI が完成実装を出せる範囲 |
+|---|---|---|---|
+| `L0 Speed First` | 最速で動かす | 原則不要 | ほぼ全体。研究前提・数式・評価指標は確認する |
+| `L1 Review Gate` | AI 実装を人間が読む | 任意。レビュー対象だけでもよい | 全体。ただし主要 diff と設計意図を説明する |
+| `L2 Selective Human Slots` | 速度と学習の両立 | 学習価値がある場合に 1〜3 個 | Slot 以外の周辺実装 |
+| `L3 Learning First` | 学習重視 | 原則 2〜4 個。少なくとも 1 個は人間が実装または書き直す | 周辺実装、テスト雛形、機械的処理 |
+| `L4 Human Driver` | 人間が主担当 | 中核処理を小さい Slot に分割 | 原則として中核実装は出さない |
+
 ## Collaboration Modes（AI との協働方法）
+
+Task Collaboration Mode は、Repository Human Involvement Profile の範囲内でタスクごとに選ぶ。
 
 | Mode | 人間の役割 | AI の役割 | 適する作業 |
 |------|------------|-----------|------------|
@@ -35,8 +50,13 @@
 | `AI Draft → Human Rewrite` | 読解、修正、採否判断 | たたき台作成 | 定型処理、CLI、設定、ログ、テスト雛形 |
 | `AI Delegate` | 仕様と検証の確認 | 実装の大部分 | GPU 高速化、CI、互換性対応、退屈なリファクタ |
 
-迷ったら `Pair Programming`。
-学びたい箇所は `Human Driver` に寄せる。
+目安：
+
+- `L0`: 通常は `AI Delegate`
+- `L1`: 通常は `AI Delegate` または `AI Draft → Human Rewrite`
+- `L2`: 通常は `Pair Programming`
+- `L3`: 通常は `Pair Programming` または `Human Driver`
+- `L4`: 通常は `Human Driver`
 
 ## Task Categories（必要に応じて分ける）
 
@@ -70,7 +90,10 @@
 
 - **Status:** `Draft` / `Active` / `Blocked` / `Done`
 - **Owner:** {{担当（人間 / AI / Pair）}}
+- **Repository Profile:** `L0 Speed First` / `L1 Review Gate` / `L2 Selective Human Slots` / `L3 Learning First` / `L4 Human Driver`
 - **Collaboration Mode:** `Human Driver` / `Pair Programming` / `AI Draft → Human Rewrite` / `AI Delegate`
+- **Profile Override:** `none` / `stricter` / `looser`
+- **Override Reason:** {{既定より人間の介入度を上げる/下げる理由。なければ none}}
 - **Created / Updated:** {{YYYY-MM-DD}} / {{YYYY-MM-DD}}
 - **Related:** {{issue #, docs/THEORY.md の式番号, docs/ARCHITECTURE.md の節 など}}
 
@@ -94,10 +117,15 @@
 
 ### Human Coding Slots
 
-AI は実装前に、人間が書くと学習効果が高い部分を 1〜3 個提案する。
-ただし、すべての作業で必須ではない。軽微な修正、rename、format、lint、設定の微修正、明らかに定型的な処理では省略してよい。
+Human Coding Slots の扱いは Repository Profile に従う。
 
-中核部分は完成コードを先に出さず、ヒント、疑似コード、入出力例、テスト観点に留める。
+- `L0`: 原則不要
+- `L1`: 任意。レビュー対象だけでもよい
+- `L2`: 学習価値がある場合に 1〜3 個提案
+- `L3`: 原則 2〜4 個提案し、少なくとも 1 個は人間が実装または書き直す
+- `L4`: 中核処理を Human Coding Slots に分割し、人間が主導する
+
+`L2` 以上では、中核部分の完成コードを先に出さず、ヒント、疑似コード、入出力例、テスト観点に留める。
 
 | Slot | 人間が書く部分 | 学習価値 | AI が出してよい支援 | 完了条件 |
 |------|----------------|----------|----------------------|----------|
@@ -109,9 +137,20 @@ AI が実装してよい部分：
 
 - {{例: CLI 引数、ログ出力、テスト雛形、設定ファイル、単純なリファクタ}}
 
-AI が完成実装を出してはいけない部分：
+AI が完成実装を先に出すべきでない部分（主に `L2` 以上）：
 
 - {{例: 研究アルゴリズムの核、モデル forward、評価指標の本体、設計パターンの採否判断}}
+
+### Subagent Use（任意）
+
+コーディングエージェントが subagent を使える場合のみ記入する。
+
+| 用途 | Subagent に任せる範囲 | Main agent / Human が確認すること |
+|---|---|---|
+| {{例: 既存 API 調査}} | {{検索、候補列挙}} | {{採用判断、設計への統合}} |
+| {{例: テスト失敗調査}} | {{ログ分析、原因候補}} | {{修正方針、実装責任}} |
+
+Subagent の出力は未確認情報として扱い、main agent が統合してから人間に提示する。
 
 ### Approach（検討した案 — 最大 5 案）
 
