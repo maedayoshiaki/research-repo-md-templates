@@ -14,8 +14,9 @@ AI コーディングエージェント（Claude Code / Codex 等）と人間が
 ## How To Use This Template
 
 1. 上部の **「Use this template」→ Create a new repository** で自分のリポを作る。
-2. 下記の **プレースホルダ／TODO を埋める**（最重要は `AGENTS.md`）。
-3. 仕組みの全体像は [`TEMPLATE_GUIDE.md`](./TEMPLATE_GUIDE.md) を参照（把握後は削除可）。
+2. `AGENTS.md` で **Repository Human Involvement Profile** を 1 つ選ぶ。
+3. 下記の **プレースホルダ／TODO を埋める**（最重要は `AGENTS.md`）。
+4. 仕組みの全体像は [`TEMPLATE_GUIDE.md`](./TEMPLATE_GUIDE.md) を参照（把握後は削除可）。
 
 ## Template Policy
 
@@ -40,6 +41,7 @@ LICENSE: Copyright (c) 2026 {{YOUR NAME / ORG}}          →  Copyright (c) 2026
 
 **まずここから（`AGENTS.md` が主体）：**
 
+- `Repository Human Involvement Profile` — 人間がどの程度コーディングに関わるかを選ぶ
 - `Project Overview` — プロジェクトの 1〜2 文
 - `Directory Structure` — 実際の構成に合わせる
 - `Commands` — 実コマンド・実スタックに合わせる
@@ -85,12 +87,12 @@ LICENSE: Copyright (c) 2026 {{YOUR NAME / ORG}}          →  Copyright (c) 2026
 | ファイル | 役割 | 更新するタイミング |
 |------|------|------|
 | `README.md` | プロジェクトの概要、始め方、主要ファイルへの入口 | 使い方や入口が変わったとき |
-| `AGENTS.md` | AI エージェント向けの作業ルール | AI の作業方針を変えるとき |
+| `AGENTS.md` | AI エージェント向けの作業ルール。Repository Human Involvement Profile もここで選ぶ | AI の作業方針を変えるとき |
 | `CONTRIBUTING.md` | Git、ブランチ、コミット、PR のルール | 開発フローを変えるとき |
 | `PLANS.md` | これから行う作業計画 | 複数ステップの作業を始めるとき |
 | `STATUS.md` | 現在の進捗、未解決事項、次にやること | 作業の開始時と終了時 |
 | `MEMORY.md` | 長期的に残す決定事項、前提、重要な知見 | 今後も参照する知見が確定したとき |
-| `docs/LEARNING.md` | コーディング学習ログ、理解した概念、復習項目 | 新しい実装概念を学んだとき |
+| `docs/LEARNING.md` | コーディング学習ログ、理解した概念、復習項目 | Profile に応じて、新しい実装概念を学んだとき |
 | `docs/THEORY.md` | 数式、理論、アルゴリズムの説明 | 理論や式を追加・修正したとき |
 | `docs/EXPERIMENTS.md` | 実験条件、結果、考察 | 実験を行ったとき |
 | `docs/ARCHITECTURE.md` | 実装構成、モジュール設計、依存関係 | 構成や責務を変えたとき |

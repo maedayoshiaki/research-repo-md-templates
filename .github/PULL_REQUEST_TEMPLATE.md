@@ -10,8 +10,21 @@
 - {{...}}
 - {{...}}
 
+## Human Involvement Profile
+
+- **Repository Profile:** `L0 Speed First` / `L1 Review Gate` / `L2 Selective Human Slots` / `L3 Learning First` / `L4 Human Driver`
+- **This PR Mode:** `Human Driver` / `Pair Programming` / `AI Draft → Human Rewrite` / `AI Delegate`
+- **Profile Override:** `none` / `stricter` / `looser`
+- **Override Reason:** {{必要なら理由}}
+
+Profile compliance:
+
+- [ ] この PR は Repository Profile に従っている
+- [ ] Profile より人間の介入度を上げた
+- [ ] Profile より人間の介入度を下げた
+- [ ] 下げた理由を PR に書いた
+
 ## Collaboration（AI / 人間の分担）
-- **Mode:** `Human Driver` / `Pair Programming` / `AI Draft → Human Rewrite` / `AI Delegate`
 
 | Area | Human / AI / Pair | Reason |
 |---|---|---|
@@ -19,11 +32,17 @@
 | 実装 | {{...}} | {{...}} |
 | テスト | {{...}} | {{...}} |
 | 高速化・定型処理 | {{...}} | {{...}} |
+| Subagent 利用 | none / used | {{調査・レビュー・機械的修正など。使った場合は main agent が確認した内容を書く}} |
 
 ## Human Coding Slots（人間が書いた箇所）
 
-学習目的の変更では、人間が実際に書いた・書き直した部分を記録する。
-学習目的でない場合や軽微な修正では「該当なし」と書く。
+Repository Profile に従って記録する。
+
+- `L0`: 該当なしでよい
+- `L1`: レビュー対象のみでもよい
+- `L2`: 実装・書き直し・説明した Slot を記録する
+- `L3`: 少なくとも 1 個の Slot を記録する
+- `L4`: 中核実装の Slot を記録する
 
 | File / Function | 人間が書いた内容 | AI の支援内容 | 学んだこと |
 |---|---|---|---|
@@ -51,6 +70,8 @@
 
 ## Learning（学習確認）
 - [ ] 学習目的の変更ではない
+- [ ] Profile 上、人間による実装は不要
+- [ ] 人間はレビューのみ行った
 - [ ] 人間が主要な関数の入出力を説明できる
 - [ ] 人間が主要な設計判断を説明できる
 - [ ] 人間が一部を自分で実装または書き直した
