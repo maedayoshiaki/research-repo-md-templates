@@ -48,7 +48,9 @@ Repository Profile に従って記録する。
 |---|---|---|---|
 | {{src/...}} | {{...}} | {{ヒント / 疑似コード / レビュー / テスト案}} | {{...}} |
 
-## L3 Design Vertical Slice（設計縦断スライス）
+<details>
+<summary><b>L3 Design Vertical Slice（設計縦断スライス）— L3 の PR のみ展開して記入</b></summary>
+
 
 `L3 Learning First` でデザインパターンや抽象化を扱う場合に記録する。
 人間が文脈のない穴埋めだけを担当しないように、抽象・代表具象・最小呼び出し・契約テストのつながりを確認する。
@@ -64,7 +66,11 @@ Repository Profile に従って記録する。
 |---|---|---|---|---|
 | {{Metric / Sampler / Repository など}} | {{PSNRMetric / RandomSampler など}} | {{どこから抽象経由で呼ぶか}} | {{置換可能性をどう確認するか}} | {{既存コード、統合先、類似実装、境界条件}} |
 
-## Implementation Style / Pattern Review（実装スタイル・設計パターン）
+</details>
+
+<details>
+<summary><b>Implementation Style / Pattern Review — 非自明な設計判断がある PR のみ展開して記入</b></summary>
+
 
 非自明な設計判断がある場合は、検討した実装スタイルや設計パターンを書く。
 候補は固定しない。GoF patterns、architecture patterns、enterprise application patterns、research-code patterns、functional / procedural / object-oriented styles などから、タスクに合うものを選ぶ。
@@ -76,6 +82,8 @@ Repository Profile に従って記録する。
 | C | {{必要なら}} | {{...}} | {{...}} | {{...}} |
 
 過剰設計でない理由、またはより単純な実装で十分だった理由：{{...}}
+
+</details>
 
 ## Design Review（設計判断）
 - [ ] 非自明な設計判断はない

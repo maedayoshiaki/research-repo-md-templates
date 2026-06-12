@@ -1,0 +1,27 @@
+# Markdown の体裁とリンク切れを CI で検査する。
+# 「AGENTS.md §1」のような腐敗した参照や、表記ゆれの混入を自動検出するのが目的。
+name: docs-lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  markdownlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v17
+        with:
+          globs: '**/*.md'
+
+  linkcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # --offline: リポ内の相対リンク・アンカーのみ検査（外部 URL の不安定さを CI に持ち込まない）
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: --offline --no-progress --include-fragments '**/*.md'
+          fail: true

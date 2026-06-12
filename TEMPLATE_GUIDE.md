@@ -43,7 +43,7 @@ Markdown ファイルは増やしすぎず、役割を分けて短く保つ。
 選んだ後にやること：
 
 1. `AGENTS.md` の `Selected Profile` を埋める。
-2. 選ばなかった Profile の詳細説明を削除する。
+2. `docs/PROFILES.md` の選ばなかった Profile の節を削除する。
 3. `PLANS.md` の `Repository Profile` 欄に同じ Profile を書く。
 4. 必要に応じて `docs/LEARNING.md` を残すか削除する。
 5. PR テンプレートの Profile 欄を使って、PR ごとに準拠を確認する。
@@ -58,6 +58,7 @@ Profile はリポジトリの既定値であり、タスク単位で一時的に
 | ファイル | 役割（ひとことで） | 主な読者 | 更新頻度 |
 |------|------|------|------|
 | `AGENTS.md` | AI への作業ルール。Human Involvement Profile もここで選ぶ | AI（兼 人間） | 低〜中 |
+| `docs/PROFILES.md` | Profile（L0〜L4）の詳細定義（正本） | AI + 人間 | 低 |
 | `CLAUDE.md` | `AGENTS.md` を参照（Claude Code 用の入口） | AI | 低 |
 | `README.md` | 人間向けの入口。概要・クイックスタート・Markdown の役割表 | 人間 | 低 |
 | `CONTRIBUTING.md` | Git、ブランチ、コミット、PR のルール | 人間 + AI | 低〜中 |
@@ -70,6 +71,8 @@ Profile はリポジトリの既定値であり、タスク単位で一時的に
 | `docs/GLOSSARY.md` | 用語集（和英・コード変数対応） | AI + 人間 | 低 |
 | `docs/EXPERIMENTS.md` | 研究の実験ログ（再現性・結果・判断） | 人間 + AI | 高 |
 | `docs/adr/` | 重い意思決定の正式記録（ADR） | 人間 | 低 |
+| `docs/AI_OUTPUT_EXAMPLES.md` | AI に期待する回答形式の例 | AI | 低 |
+| `docs/L3_DESIGN_VERTICAL_SLICE.md` | L3 の設計縦断スライスの運用ルール | 人間 + AI | 低 |
 | `DESIGN.md` | 見た目。UI を作る場合のみ | AI + 人間 | 低 |
 | `.github/PULL_REQUEST_TEMPLATE.md` | PR の定型フォーマット | 人間 | 低 |
 

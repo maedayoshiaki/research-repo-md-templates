@@ -26,38 +26,15 @@
 - 学習したい作業では、Profile に応じて `Human Coding Slots`、`Explain-back` を積極的に使う。
 - ただし、`L0` / `L1` や軽微な修正・定型作業では `Human Coding Slots` を省略してよい。
 - デザインパターン、実装スタイル、研究アルゴリズム、評価指標、前処理などを学ぶ場合は、できるだけ `Human Coding Slots` を使う。
-- `L3` では、文脈のない穴埋めだけにしない。人間が抽象・代表具象・最小呼び出し・契約テストをつなげて書く `Design Vertical Slice` を作る。
+- `L3` では、文脈のない穴埋めだけにしない。人間が抽象・代表具象・最小呼び出し・契約テストをつなげて書く `Design Vertical Slice` を作る（詳細は [`docs/L3_DESIGN_VERTICAL_SLICE.md`](./docs/L3_DESIGN_VERTICAL_SLICE.md)）。
 - コーディングエージェントが subagent を使える場合は、調査・レビュー・テスト案・機械的修正に使ってよい。ただし Profile や人間レビューを迂回しない。
 - 完了したら `Outcomes & Retrospective` を埋め、要点を `MEMORY.md` へ。
 
-## Repository Human Involvement Profiles（リポジトリ全体の介入度）
+## Repository Human Involvement Profiles / Collaboration Modes
 
-| Profile | 目的 | Human Coding Slots | AI が完成実装を出せる範囲 |
-|---|---|---|---|
-| `L0 Speed First` | 最速で動かす | 原則不要 | ほぼ全体。研究前提・数式・評価指標は確認する |
-| `L1 Review Gate` | AI 実装を人間が読む | 任意。レビュー対象だけでもよい | 全体。ただし主要 diff と設計意図を説明する |
-| `L2 Selective Human Slots` | 速度と学習の両立 | 学習価値がある場合に 1〜3 個 | Slot 以外の周辺実装 |
-| `L3 Learning First` | 学習重視 | 原則 1〜3 個の `Design Vertical Slice`。少なくとも 1 個は人間が実装または書き直す | 文脈整理、類似実装、周辺実装、テスト雛形、機械的処理 |
-| `L4 Human Driver` | 人間が主担当 | 中核処理を小さい Slot に分割 | 原則として中核実装は出さない |
-
-## Collaboration Modes（AI との協働方法）
-
-Task Collaboration Mode は、Repository Human Involvement Profile の範囲内でタスクごとに選ぶ。
-
-| Mode | 人間の役割 | AI の役割 | 適する作業 |
-|------|------------|-----------|------------|
-| `Human Driver` | 設計・実装の主担当 | ヒント、レビュー、テスト案 | 学びたい文法、PyTorch 基本、研究アルゴリズム |
-| `Pair Programming` | 方針決定と主要実装 | 小さい実装案、レビュー、代替案 | 通常の研究コード開発 |
-| `AI Draft → Human Rewrite` | 読解、修正、採否判断 | たたき台作成 | 定型処理、CLI、設定、ログ、テスト雛形 |
-| `AI Delegate` | 仕様と検証の確認 | 実装の大部分 | GPU 高速化、CI、互換性対応、退屈なリファクタ |
-
-目安：
-
-- `L0`: 通常は `AI Delegate`
-- `L1`: 通常は `AI Delegate` または `AI Draft → Human Rewrite`
-- `L2`: 通常は `Pair Programming`
-- `L3`: 通常は `Pair Programming` または `Human Driver`
-- `L4`: 通常は `Human Driver`
+Profile（L0〜L4）の定義と詳細は [`docs/PROFILES.md`](./docs/PROFILES.md) を、
+Collaboration Mode の定義と Profile ごとの目安は `AGENTS.md` の「Task Collaboration Modes」を正とする
+（この場所には表を複製しない。複製はドリフトの原因になる）。
 
 ## Task Categories（必要に応じて分ける）
 
@@ -137,6 +114,7 @@ Human Coding Slots の扱いは Repository Profile に従う。
 
 #### L3 Design Vertical Slice（設計縦断スライス）
 
+運用ルールの詳細は [`docs/L3_DESIGN_VERTICAL_SLICE.md`](./docs/L3_DESIGN_VERTICAL_SLICE.md) を参照。
 `L3` でデザインパターンや抽象化を学ぶ場合は、単独の関数だけでなく、設計の流れが見える縦断スライスを人間が書く。
 AI は全体文脈、既存コード調査、候補設計、疑似コード、レビュー、類似実装、統合作業を担当してよい。
 
@@ -221,7 +199,7 @@ Subagent の出力は未確認情報として扱い、main agent が統合して
 
 #### Decision Log
 
-{{作業中に下した判断と理由。例: 「2024-xx-xx 〇〇は△△の理由で採用しない」}}
+{{作業中に下した判断と理由。例: 「{{YYYY-MM-DD}} 〇〇は△△の理由で採用しない」}}
 
 #### Outcomes & Retrospective
 

@@ -88,6 +88,7 @@ LICENSE: Copyright (c) 2026 {{YOUR NAME / ORG}}          →  Copyright (c) 2026
 |------|------|------|
 | `README.md` | プロジェクトの概要、始め方、主要ファイルへの入口 | 使い方や入口が変わったとき |
 | `AGENTS.md` | AI エージェント向けの作業ルール。Repository Human Involvement Profile もここで選ぶ | AI の作業方針を変えるとき |
+| `docs/PROFILES.md` | Human Involvement Profile（L0〜L4）の詳細定義（正本） | Profile の運用ルールを変えるとき |
 | `CONTRIBUTING.md` | Git、ブランチ、コミット、PR のルール | 開発フローを変えるとき |
 | `PLANS.md` | これから行う作業計画 | 複数ステップの作業を始めるとき |
 | `STATUS.md` | 現在の進捗、未解決事項、次にやること | 作業の開始時と終了時 |
@@ -98,6 +99,9 @@ LICENSE: Copyright (c) 2026 {{YOUR NAME / ORG}}          →  Copyright (c) 2026
 | `docs/ARCHITECTURE.md` | 実装構成、モジュール設計、依存関係 | 構成や責務を変えたとき |
 | `docs/GLOSSARY.md` | 用語、略語、表記ゆれの整理 | 重要語を追加したとき |
 | `docs/adr/` | 重要な設計判断の記録 | 後から理由を追跡したい判断をしたとき |
+| `docs/AI_OUTPUT_EXAMPLES.md` | AI に期待する回答形式の例 | 回答形式の方針を変えるとき |
+| `docs/L3_DESIGN_VERTICAL_SLICE.md` | L3 の設計縦断スライスの運用ルール | L3 の運用を変えるとき |
+| `DESIGN.md` | UI の見た目の仕様（UI を持つ場合のみ） | デザイン方針を変えるとき |
 
 ## License
 

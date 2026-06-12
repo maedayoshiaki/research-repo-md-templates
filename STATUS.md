@@ -25,7 +25,7 @@
 
 ## Open Questions for the Human（人間に確認したいこと）
 
-> AI はここに「人間の判断が要る項目」を書き出す（AGENTS.md §1 の確認ポイント）。
+> AI はここに「人間の判断が要る項目」を書き出す（AGENTS.md の「Human review required」を参照）。
 
 - [ ] {{設計 / 数式 / 仕様について確認したいこと}}
 

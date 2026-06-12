@@ -1,4 +1,4 @@
-# === Secrets / 認証情報（AGENTS.md §8 Boundaries と整合）===
+# === Secrets / 認証情報（AGENTS.md の Core rules「API キー・認証情報を書かない」と整合）===
 .env
 .env.*
 *.key
@@ -26,6 +26,7 @@ dist/
 
 # === 研究の生成物（プロジェクトに合わせて調整）===
 # <!-- TODO: 実際のデータ/成果物の置き場所に合わせて見直す -->
+# 注意: *.log は実験ログも無視する。リポジトリに残したいログがあれば除外パターンを調整する
 data/
 outputs/
 checkpoints/

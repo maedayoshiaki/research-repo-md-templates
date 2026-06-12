@@ -22,7 +22,7 @@ AI コーディングエージェントに期待する回答形式の例。
 | `L0 Speed First` | すぐ実装方針と完成実装に進んでよい | 原則省略 | 変更点、実行方法、検証結果 |
 | `L1 Review Gate` | 完成実装を出してよいが、主要 diff を説明する | 任意 | 人間が読むべき diff、設計意図 |
 | `L2 Selective Human Slots` | 重要部分だけ Slot 化し、周辺は実装してよい | 1〜3 個 | Slot、AI 実装部分、理解確認 |
-| `L3 Learning First` | 中核実装はヒント・疑似コード・レビュー中心 | 2〜4 個 | 人間が実装した中核、学習事項 |
+| `L3 Learning First` | 中核実装はヒント・疑似コード・レビュー中心 | 1〜3 個（`Design Vertical Slice`） | 人間が実装した中核、学習事項 |
 | `L4 Human Driver` | 完成コードを先に出さず、問題分解とレビュー中心 | 中核処理を小さく分割 | 人間主導の実装、再実装できる範囲 |
 
 ## When to Suggest Human Coding Slots

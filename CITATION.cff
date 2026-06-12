@@ -1,0 +1,15 @@
+# GitHub がこのファイルを認識し、リポジトリページに「Cite this repository」ボタンを表示する。
+# 参考: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files
+# 派生プロジェクトでは値を自分のものに置き換える。引用が不要なプロジェクトでは削除してよい。
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "{{プロジェクト名}}"
+type: software
+authors:
+  - family-names: "{{Family}}"
+    given-names: "{{Given}}"
+    orcid: "https://orcid.org/{{0000-0000-0000-0000}}"
+version: "{{0.1.0}}"
+date-released: "{{YYYY-MM-DD}}"
+url: "https://github.com/{{user}}/{{repo}}"
+license: MIT
