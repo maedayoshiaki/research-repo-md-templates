@@ -21,6 +21,6 @@
 - `CITATION.cff`（GitHub の「Cite this repository」対応）
 - `CHANGELOG.md`（このファイル）
 
-## [0.1.0] - {{YYYY-MM-DD}}
+## [0.1.0] - 2026-06-12
 
 - 初回タグ。既存テンプレート一式。

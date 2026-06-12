@@ -1,6 +1,12 @@
 # GitHub がこのファイルを認識し、リポジトリページに「Cite this repository」ボタンを表示する。
 # 参考: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files
 # 派生プロジェクトでは値を自分のものに置き換える。引用が不要なプロジェクトでは削除してよい。
+#
+# テンプレート配布上の注意:
+#   orcid / date-released / url は GitHub の CFF バリデーションで形式（ORCID/日付/URL）が
+#   検証されるため、{{...}} のままだとリポジトリページに警告バナーが出る。
+#   これらは初期状態でコメントアウトしてある。自分の値を入れたらコメントを外すこと。
+#   title / authors の名前 / version は自由文字列なので {{...}} のままでも警告は出ない。
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 title: "{{プロジェクト名}}"
@@ -8,8 +14,8 @@ type: software
 authors:
   - family-names: "{{Family}}"
     given-names: "{{Given}}"
-    orcid: "https://orcid.org/{{0000-0000-0000-0000}}"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"   # 値を入れてからコメントを外す
 version: "{{0.1.0}}"
-date-released: "{{YYYY-MM-DD}}"
-url: "https://github.com/{{user}}/{{repo}}"
+# date-released: "2026-01-01"                           # 形式: YYYY-MM-DD。値を入れてからコメントを外す
+# url: "https://github.com/user/repo"                   # 値を入れてからコメントを外す
 license: MIT
